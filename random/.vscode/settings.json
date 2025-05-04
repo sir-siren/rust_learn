@@ -1,7 +1,7 @@
 {
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "debug.allowBreakpointsEverywhere": true,
   "editor.fontSize": 20,
@@ -11,5 +11,5 @@
   "rust-analyzer.diagnostics.disabled": ["unlinked-file"],
   "terminal.integrated.fontSize": 20,
   "workbench.panel.defaultLocation": "right",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 0
 }
