@@ -19,14 +19,14 @@ the None variant. Derive the Debug trait.
 Define a `Deck` struct with a single `cards` field set
 to a vector of `Card` structs. Derive the Debug trait.
 
-Define a `new` constructor function on the `Deck``. It
+Define a `new` constructor function on the `Deck`. It
 should iterate over the 4 possible suits and the
-13 main suits (exclude Joker), create 52 Card instances,
+13 main ranks (exclude Joker), create 52 Card instances,
 populate them into a  vector, and then instantiate and
-return a `Deck`` instance with the cards.
+return a `Deck` instance with the cards.
 
 Define a `shuffle` method on `Deck` that randomizes the
-order of the cards. In `main`, instantiate the `Deck``,
+order of the cards. In `main`, instantiate the `Deck`,
 call the method, and confirm the card order is
 randomized.
 
@@ -36,7 +36,7 @@ positions. As a reminder, a Joker will have a None suit.
 Invoke the method in `main` and confirm you see the
 Jokers added.
 
-Define a `delete_random_card` method on `Deck``. The
+Define a `delete_random_card` method on `Deck`. The
 deletion will be based on probability. The method should
 have a 65% chance of deleting a random card from the
 `Deck`.  Target the deleted card by a random index
