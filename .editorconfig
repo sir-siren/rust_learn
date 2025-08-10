@@ -1,0 +1,48 @@
+# ======================================================================
+#  Perfectly matches default rustfmt style rules.
+#  Precision Formatting Rules for Rust Projects Across OS Boundaries
+# ======================================================================
+root = true
+
+# ----------------------------------------------------------------------
+# 🌍 Global Rust Codebase Defaults
+# ----------------------------------------------------------------------
+[*]
+charset = utf-8                    # Universal UTF-8 encoding
+end_of_line = lf                    # LF only
+indent_style = space                # Spaces mandated, tabs forbidden
+indent_size = 4                     # Matches rustfmt default
+insert_final_newline = true         # Every file ends cleanly
+trim_trailing_whitespace = true     # No rogue spaces allowed
+max_line_length = 100               # Standard readability soft limit
+
+# ----------------------------------------------------------------------
+# 🦀 Rust Source Files
+# ----------------------------------------------------------------------
+[*.rs]
+indent_size = 4
+max_line_length = 100
+trim_trailing_whitespace = true
+
+# ----------------------------------------------------------------------
+# 📦 Cargo & TOML Files (Cargo.toml, Rust tool configs)
+# ----------------------------------------------------------------------
+[*.toml]
+indent_size = 4
+trim_trailing_whitespace = true
+
+# ----------------------------------------------------------------------
+# 📜 Markdown Docs (Rustdoc, README.md)
+# ----------------------------------------------------------------------
+[*.md]
+trim_trailing_whitespace = false    # Preserve intentional double spaces
+max_line_length = off               # Allow long links/URLs
+
+# ----------------------------------------------------------------------
+# 📂 Gitignore & Hidden Config Files for Rust
+# ----------------------------------------------------------------------
+[.gitignore]
+trim_trailing_whitespace = false
+
+[.*]
+trim_trailing_whitespace = false
