@@ -40,12 +40,12 @@ should determine if the salad includes any vegetable more
 than once. Return a Boolean.
 */
 
-trait Caloric {
+pub trait Caloric {
     fn calories(&self) -> u32;
 }
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq)]
-enum Vegetable {
+pub enum Vegetable {
     Tomato,
     Cucumber,
     SweetPotato,
@@ -62,7 +62,7 @@ impl Caloric for Vegetable {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-enum Protein {
+pub enum Protein {
     CrispyChicken,
     FriedChicken,
     Steak,
@@ -81,7 +81,7 @@ impl Caloric for Protein {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-enum Dressing {
+pub enum Dressing {
     Ranch,
     Vinaigrette,
     Italian,
@@ -94,5 +94,105 @@ impl Caloric for Dressing {
             Self::Vinaigrette => 120,
             Self::Italian => 130,
         }
+    }
+}
+
+#[derive(Debug)]
+pub struct Salad {
+    protein: Protein,
+    vegetables: Vec<Vegetable>,
+    dressing: Dressing,
+}
+
+impl Salad {
+    pub fn new(protein: Protein, vegetables: Vec<Vegetable>, dressing: Dressing) -> Self {
+        Self {
+            protein,
+            vegetables,
+            dressing,
+        }
+    }
+
+    pub fn is_valid(&self) -> bool {
+        !self.vegetables.is_empty()
+    }
+
+    pub fn calories(&self) -> u32 {
+        let veggie_calories: u32 = self.vegetables.iter().map(|v| v.calories()).sum();
+        self.protein.calories() + veggie_calories + self.dressing.calories()
+    }
+
+    pub fn has_duplicate_vegetables(&self) -> bool {
+        use std::collections::HashSet;
+        let mut seen = HashSet::new();
+        for veggie in &self.vegetables {
+            if !seen.insert(veggie) {
+                return true;
+            }
+        }
+        false
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_new_salad() {
+        let protein = Protein::Tofu;
+        let vegetables = vec![Vegetable::Tomato, Vegetable::Cucumber];
+        let dressing = Dressing::Vinaigrette;
+        let salad = Salad::new(protein.clone(), vegetables.clone(), dressing.clone());
+
+        assert_eq!(salad.protein, protein);
+        assert_eq!(salad.vegetables, vegetables);
+        assert_eq!(salad.dressing, dressing);
+    }
+
+    #[test]
+    fn test_is_valid() {
+        let valid_salad = Salad::new(
+            Protein::Tofu,
+            vec![Vegetable::Tomato],
+            Dressing::Vinaigrette,
+        );
+        assert!(valid_salad.is_valid());
+
+        let invalid_salad = Salad::new(Protein::Tofu, vec![], Dressing::Vinaigrette);
+        assert!(!invalid_salad.is_valid());
+    }
+
+    #[test]
+    fn test_calories() {
+        let salad = Salad::new(
+            Protein::Tofu,
+            vec![Vegetable::Tomato, Vegetable::SweetPotato],
+            Dressing::Vinaigrette,
+        );
+        // Tofu: 200, Tomato: 20, SweetPotato: 100, Vinaigrette: 120
+        // Total: 200 + 20 + 100 + 120 = 440
+        assert_eq!(salad.calories(), 440);
+    }
+
+    #[test]
+    fn test_has_duplicate_vegetables() {
+        let salad_with_duplicates = Salad::new(
+            Protein::Tofu,
+            vec![Vegetable::Tomato, Vegetable::Cucumber, Vegetable::Tomato],
+            Dressing::Vinaigrette,
+        );
+        assert!(salad_with_duplicates.has_duplicate_vegetables());
+
+        let salad_without_duplicates = Salad::new(
+            Protein::Tofu,
+            vec![
+                Vegetable::Tomato,
+                Vegetable::Cucumber,
+                Vegetable::SweetPotato,
+            ],
+            Dressing::Vinaigrette,
+        );
+        assert!(!salad_without_duplicates.has_duplicate_vegetables());
     }
 }

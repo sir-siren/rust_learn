@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "vadimcn.vscode-lldb",
+        "rust-lang.rust-analyzer",
+        "jscearcy.rust-doc-viewer",
+        "ms-vscode.anycode-rust",
+        "seaql.firedbg-rust",
+        "lhenryy.rust-panic-highlighter"
+    ]
+}

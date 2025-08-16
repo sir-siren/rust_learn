@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug current file",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=${fileBasenameNoExtension}",
+                    "--package=${workspaceFolderBasename}"
+                ],
+                "filter": {
+                    "name": "${fileBasenameNoExtension}",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in current file",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=${fileBasenameNoExtension}",
+                    "--package=${workspaceFolderBasename}"
+                ],
+                "filter": {
+                    "name": "${fileBasenameNoExtension}",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

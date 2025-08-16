@@ -54,7 +54,7 @@
 //     // Outside the block
 //     println!("I walked {miles} kilometers today.");
 
-//     // Complier Directives
+//     // Compiler Directives
 //     // The #[allow(unused_variables)] directive is used to suppress warnings for unused variables
 //     // Can be placed above functions, modules, or structs
 //     // Also can be placed on top of the file with `#![allow(unused_variables)]`
@@ -63,8 +63,8 @@
 // }
 
 fn main() {
-    let apples: i32 = 50;
-    let oranges: i32 = 30;
-    let fruits: i32 = apples + oranges;
-    println!("I have {fruits} fruits");
+    let apples: i32  = 30;
+    let oranges: i32 = 40;
+    let sum: i32 = apples + oranges;
+    println!("Apples is {apples} Oranges is {oranges}, and i have {sum} of fruits");
 }
